@@ -1,6 +1,6 @@
-# React + Vite
+# DMS-PRO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Drink Management System (DMS) is an application that enables a store to digitally construct their beverage coolers from the physical cooler to the end that: the store will reduce labor hours required for inventory counting and miscounts.
 
 Currently, two official plugins are available:
 
