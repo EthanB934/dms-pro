@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const Register = () => {
     const address = useRef()
@@ -55,6 +55,8 @@ export const Register = () => {
             {" "}<input type="text" ref={address}/> {" "}
             <br/>
             <button className="registration-button" id="register" >Register</button>
+            <br />
+            <Link to="/login">Return to Login</Link>
         </fieldset>
     </form>
 }
