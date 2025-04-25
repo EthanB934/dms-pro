@@ -8,5 +8,5 @@ export const Authorized = () => {
         return <Outlet />
     }
     // If they are not authenticated, then set the user to an authentication route
-    return <Navigate to="/register" replace/>
+    return <Navigate to="/login" replace/>
 }
