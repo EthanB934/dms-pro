@@ -1,3 +1,14 @@
+import { Route, Routes } from "react-router-dom"
+import { Register } from "../authentication/registration"
+import { Authorized } from "../authentication/authorized"
+
 export const ApplicationViews = () => {
-    return <>This is where I will begin to define all of my application routes with their components</>
+    return <Routes>
+        {/* The authentication routes are available to not authenticated users */}
+        <Route path="/register" element={<Register />}/>
+        <Route element={<Authorized />}>
+        {/* If users authenticate, then they may view other site components */}
+            <Route path="/" element={<>This is the first authorized component</>} />
+        </Route>
+    </Routes>
 }
