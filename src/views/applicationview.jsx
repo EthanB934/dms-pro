@@ -5,18 +5,34 @@ import { Login } from "../authentication/login"
 import { Home } from "../pages/Home"
 import { CoolerForm } from "../components/coolerform"
 import { DoorForm } from "../components/doorform"
+import { useEffect, useState } from "react"
+import { getAllTypes } from "../services/types"
 
 export const ApplicationViews = () => {
+    const [token, setToken] = useState({});
+    const [types, setTypes] = useState([])
+
+    useEffect(() => {
+        setToken({"token": localStorage.getItem("store_token")})
+    }, [])
+
+    useEffect(() => {
+        if("token" in token) {
+            // Responsible for fetching all cooler door types
+            getAllTypes(token).then((typesArray) => setTypes(typesArray))
+        }
+    }, [token])
+
     return <Routes>
         {/* The authentication routes are available to not authenticated users */}
         <Route path="/register" element={<Register />}/>
         <Route path="/login" element={<Login />}/>
-        <Route element={<Authorized />}>
+        <Route element={<Authorized setter={setToken}/>}>
         {/* If users authenticate, then they may view other site components */}
             <Route path="/" element={<Home />} />
             <Route path="create">
                 <Route index element={<CoolerForm />}/>
-                <Route path="door" element={<DoorForm />} />
+                <Route path="door" element={<DoorForm types={types}/>} />
             </Route> 
         </Route>
     </Routes>
