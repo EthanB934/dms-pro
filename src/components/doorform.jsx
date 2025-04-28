@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { createDoor } from "../services/DoorServices/doors";
 
 export const DoorForm = ({ types, token }) => {
@@ -7,6 +7,7 @@ export const DoorForm = ({ types, token }) => {
     const slots = useRef();
     const productChoice = useRef();
     const { coolerId } = useParams();
+    const navigate = useNavigate();
 
     const handleCreateDoor = async () => {
         event.preventDefault()
@@ -17,9 +18,7 @@ export const DoorForm = ({ types, token }) => {
             typeId: productChoice.current.value,
             coolerId: coolerId
         }
-        const createdDoor = await createDoor(door, token)
-        console.log(createdDoor)
-
+        createDoor(door, token).then(() => navigate(`/${coolerId}`))
     }
 
     return (

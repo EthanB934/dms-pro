@@ -36,5 +36,5 @@ export const ApplicationViews = () => {
                 <Route path="door" element={<DoorForm token={token} types={types}/>} />
             </Route> 
         </Route>
-    </Routes>
+    </Routes>   
 }

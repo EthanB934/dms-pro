@@ -5,7 +5,7 @@ export const createDoor = async (door, token) => {
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Token ${token.token}`,
-            "Accept": "application/json"
+            "Accept": "application/json",
         },
         body: JSON.stringify(door)
     })
@@ -14,4 +14,18 @@ export const createDoor = async (door, token) => {
     const createdDoor = doorPromise.json()
 
     return createdDoor
+}
+
+export const getDoorsByCoolerId = async (coolerId, token) => {
+    const doorsPromise = await fetch(`http://localhost:8000/doors/${coolerId}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Token ${token.token}`,
+            "Accept": "application/json",
+        },
+    })
+
+    const doorsArray = await doorsPromise.json()
+
+    return doorsArray
 }
