@@ -6,7 +6,7 @@ import { Home } from "../pages/Home"
 import { CoolerForm } from "../components/coolerform"
 import { DoorForm } from "../components/doorform"
 import { useEffect, useState } from "react"
-import { getAllTypes } from "../services/types"
+import { getAllTypes } from "../services/TypeServices/types"
 
 export const ApplicationViews = () => {
     const [token, setToken] = useState({});
@@ -23,16 +23,17 @@ export const ApplicationViews = () => {
         }
     }, [token])
 
+    
     return <Routes>
         {/* The authentication routes are available to not authenticated users */}
         <Route path="/register" element={<Register />}/>
         <Route path="/login" element={<Login />}/>
         <Route element={<Authorized setter={setToken}/>}>
         {/* If users authenticate, then they may view other site components */}
-            <Route path="/" element={<Home />} />
-            <Route path="create">
-                <Route index element={<CoolerForm />}/>
-                <Route path="door" element={<DoorForm types={types}/>} />
+            <Route path="/" element={<Home token={token}/>} />
+            <Route path=":coolerId">
+                <Route index element={<CoolerForm token={token}/>}/>
+                <Route path="door" element={<DoorForm token={token} types={types}/>} />
             </Route> 
         </Route>
     </Routes>

@@ -1,17 +1,29 @@
 import { useRef } from "react"
+import { useParams } from "react-router-dom";
+import { createDoor } from "../services/DoorServices/doors";
 
-export const DoorForm = ({ types }) => {
+export const DoorForm = ({ types, token }) => {
     const shelves = useRef();
     const slots = useRef();
     const productChoice = useRef();
+    const { coolerId } = useParams();
 
     const handleCreateDoor = async () => {
         event.preventDefault()
-        // This is where the logic to send a request to the API will be built
+        // Builds a door object to add to a cooler
+        const door = {
+            shelves: shelves.current.value,
+            slots: slots.current.value,
+            typeId: productChoice.current.value,
+            coolerId: coolerId
+        }
+        const createdDoor = await createDoor(door, token)
+        console.log(createdDoor)
+
     }
 
     return (
-        <form className="door-form" type="submit" onClick={handleCreateDoor}>
+        <form className="door-form" type="submit" onSubmit={handleCreateDoor}>
             <h1>Door Creation</h1>
             <fieldset className="door-fields">
                 <label>Shelves</label>
