@@ -8,10 +8,12 @@ export const CoolerForm = ({ token }) => {
   const { coolerId } = useParams();
 
   useEffect(() => {
-    // Gets all doors associated with the user selected cooler, or new cooler
-    getDoorsByCoolerId(coolerId, token).then((doorsArray) =>
-      setDoors(doorsArray)
+    if("token" in token) {
+      // Gets all doors associated with the user selected cooler, or new cooler
+      getDoorsByCoolerId(coolerId, token).then((doorsArray) =>
+        setDoors(doorsArray)
     );
+  }
   }, [token]);
 
   const handleCoolerCreation = () => {
@@ -25,7 +27,7 @@ export const CoolerForm = ({ token }) => {
           <ul className="doors-list">
             {doors.map((door, index) => {
               return (
-                <div className="door">
+                <div className="door" key={door.id}>
                   <li key={door.id}>
                     Door {index + 1} <br />
                     Total Shelves {door.shelves} <br />

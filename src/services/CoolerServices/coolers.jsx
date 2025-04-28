@@ -12,3 +12,18 @@ export const createCooler = async (token) => {
 
   return cooler
 };
+
+export const getStoreCoolers = async (token) => {
+
+  const coolersPromise = await fetch("http://localhost:8000/coolers", {
+    method: "GET",
+    headers: {
+      "Authorization": `Token ${token.token}`,
+      "Accept": "application/json"
+    }
+  })
+
+  const coolersArray = coolersPromise.json()
+
+  return coolersArray
+}
