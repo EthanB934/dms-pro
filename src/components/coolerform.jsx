@@ -16,9 +16,6 @@ export const CoolerForm = ({ token }) => {
   }
   }, [token]);
 
-  const handleCoolerCreation = () => {
-    // This is where the logic to save a cooler to the database will be
-  };
   return (
     <article className="cooler-page">
       <section className="doors">

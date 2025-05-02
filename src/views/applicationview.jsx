@@ -7,6 +7,7 @@ import { CoolerForm } from "../components/coolerform"
 import { DoorForm } from "../components/doorform"
 import { useEffect, useState } from "react"
 import { getAllTypes } from "../services/TypeServices/types"
+import { EditCooler } from "../components/editcooler"
 
 export const ApplicationViews = () => {
     const [token, setToken] = useState({});
@@ -31,9 +32,10 @@ export const ApplicationViews = () => {
         <Route element={<Authorized setter={setToken}/>}>
         {/* If users authenticate, then they may view other site components */}
             <Route path="/" element={<Home token={token}/>} />
-            <Route path=":coolerId">
+            <Route path="cooler/:coolerId">
                 <Route index element={<CoolerForm token={token}/>}/>
                 <Route path="door" element={<DoorForm token={token} types={types}/>} />
+                <Route path="edit" element={<EditCooler token={token} types={types}/>} />
             </Route> 
         </Route>
     </Routes>   

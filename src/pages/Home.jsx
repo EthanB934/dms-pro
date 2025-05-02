@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { createCooler, getStoreCoolers } from "../services/CoolerServices/coolers"
-
+import "./Home.css"
 export const Home = ({ token }) => {
     const [coolers, setCoolers] = useState([])
     const [cooler, setCooler] = useState({})
@@ -20,11 +20,19 @@ export const Home = ({ token }) => {
         createCooler(token).then((coolerObject) => setCooler(coolerObject))
     }
     
+    const handleCoolerEdit = (event) => {
+    // Handles navigating the user to the cooler's door list. 
+        // The event captures the id of each cooler list item
+        const selectedCoolerId = parseInt(event.target.id)
+        // navigates the user to the cooler door list view to edit each door
+        navigate(`cooler/${selectedCoolerId}/edit`)
+    }
+
     useEffect(() => {
         // Observes cooler state, will be the cooler that the user selected
         if("id" in cooler) {
             // If user is creating a new cooler, they are navigated to it's form
-            navigate(`/${cooler.id}`)
+            navigate(`cooler/${cooler.id}`)
         }
     }, [cooler])
 
@@ -36,12 +44,14 @@ export const Home = ({ token }) => {
 
                 {coolers.map((cooler, index) => {
                     return (
-                    <li key={cooler.id}>
-                        <Link to={`${cooler.id}`}>Cooler #{index + 1}</Link>{" "} | {" "}
-                        Total Capacity {cooler.total_capacity} units <br />
+                        <li key={cooler.id}>
+                        <Link to={`cooler/${cooler.id}`}>Cooler #{index + 1}</Link>{" "} | {" "}
+                        Total Capacity {cooler.total_capacity.toLocaleString("en")} units 
+                        <button className="cooler-edit" id={cooler.id} onClick={handleCoolerEdit}>Edit Cooler</button>
+                        <br />
                         Contains: | {cooler.cooler_types.map((type) => {
                             return (
-                                <> {type.name} | </>
+                                <> {type.name} | </>    
                             )
                         })} 
                     </li>
