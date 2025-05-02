@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
 
-export const Authorized = ({ setter }) => { 
+export const Authorized = () => { 
     // This function component will be responsible for authorizing authenticated users
     // First, I need to make sure they have an authentication token
     if(localStorage.getItem("store_token")) {

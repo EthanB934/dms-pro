@@ -1,8 +1,9 @@
 import { useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { createDoor } from "../services/DoorServices/doors";
+import { Types } from "./types";
 
-export const DoorForm = ({ types, token }) => {
+export const DoorForm = ({ token }) => {
     const shelves = useRef();
     const slots = useRef();
     const productChoice = useRef();
@@ -31,12 +32,7 @@ export const DoorForm = ({ types, token }) => {
                 <label>Slots</label>
                 {" "}<input type="number" min="1" ref={slots}/>{" "}
                 <br />
-                <select ref={productChoice}>
-                    <option>Select Product</option>
-                    {types.map((type) => {
-                        return <option key={type.id} value={type.id}>{type.name}</option>
-                    })}
-                </select>
+                <Types  choice={productChoice} token={token}/>
                 <br />
                 <button className="door" id="door-create">Add Door to Cooler</button>
             </fieldset>

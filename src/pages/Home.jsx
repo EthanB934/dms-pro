@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  createCooler,
-  getStoreCoolers,
-} from "../services/CoolerServices/coolers";
+import {createCooler,getStoreCoolers} from "../services/CoolerServices/coolers";
+import { getAllTypes } from "../services/TypeServices/types"
 import "./Home.css";
 export const Home = ({ token }) => {
   const [coolers, setCoolers] = useState([]);
@@ -60,14 +58,14 @@ export const Home = ({ token }) => {
                 <br />
                 <ul className="types-list">
                   {cooler.cooler_types.map((type) => {
-                    return (
-                      <li className="type" key={type.id}>
+                      return (
+                        <li className="type" key={type.id}>
                         {" "}
                         {type.name}{" "}
                       </li>
                     );
                   })}
-                </ul>
+                  </ul>
               </li>
             );
           })}
