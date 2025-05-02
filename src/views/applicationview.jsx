@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Register } from "../authentication/registration";
 import { Authorized } from "../authentication/authorized";
 import { Login } from "../authentication/login";
@@ -8,24 +8,28 @@ import { DoorForm } from "../components/doorform";
 import { useEffect, useState } from "react";
 import { EditCooler } from "../components/editcooler";
 import { LogOut } from "../authentication/logout";
+import { BackToHome } from "../components/backtohome";
 
 export const ApplicationViews = () => {
+  const location = useLocation();
   const [token, setToken] = useState({});
 
   useEffect(() => {
     setToken({ token: localStorage.getItem("store_token") });
   }, []);
-  
+
   return (
+
     <Routes>
       {/* The authentication routes are available to not authenticated users */}
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={<Register setter={setToken} />} />
       <Route path="/login" element={<Login setter={setToken} />} />
       <Route
         element={
           <>
             <Authorized setter={setToken} />
-            <LogOut setter={setToken}/>
+            <LogOut setter={setToken} />
+            {location.pathname !== "/" ? <BackToHome /> : ""}
           </>
         }
       >
@@ -33,14 +37,8 @@ export const ApplicationViews = () => {
         <Route path="/" element={<Home token={token} />} />
         <Route path="cooler/:coolerId">
           <Route index element={<CoolerForm token={token} />} />
-          <Route
-            path="door"
-            element={<DoorForm token={token} />}
-          />
-          <Route
-            path="edit"
-            element={<EditCooler token={token} />}
-          />
+          <Route path="door" element={<DoorForm token={token} />} />
+          <Route path="edit" element={<EditCooler token={token} />} />
         </Route>
       </Route>
     </Routes>
