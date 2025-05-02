@@ -32,7 +32,7 @@ export const Login = ({ setter }) => {
         throw new Error("There was an issue registering your account")
     }
     localStorage.setItem("store_token", storeAsUser.token)
-    setter(storeAsUser)
+    setter({"token": storeAsUser.token})
     navigate("/")
 }
 
