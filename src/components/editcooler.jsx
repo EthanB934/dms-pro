@@ -86,7 +86,6 @@ export const EditCooler = ({ token, types }) => {
                     }}
                   >
                     <fieldset className="door-fields">
-                      <h1>Door #{door.id}</h1>
                       <label>Shelves</label>{" "}
                       <input type="number" min="1" ref={shelves} /> <br />
                       <label>Slots</label>{" "}

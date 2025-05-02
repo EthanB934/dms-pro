@@ -10,7 +10,6 @@ export const DeleteModal = ({door, onCancel, refetcher, showModal, token}) => {
         <section className="delete-modal">
         <h2>Are you sure that you wish to delete this door?</h2>
             <div className="door">
-                Door: #{door.id} <br />
                 Total Shelves: {door.shelves} <br />
                 Total Slots: {door.slots} <br />
                 Type: {door.type.name}
