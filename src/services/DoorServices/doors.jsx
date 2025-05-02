@@ -29,3 +29,18 @@ export const getDoorsByCoolerId = async (coolerId, token) => {
 
     return doorsArray
 }
+
+export const updateDoor = async (updateDoorForm, token) => {
+    const promise = await fetch(`http://localhost:8000/doors/${updateDoorForm.doorId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${token.token}`,
+        },
+        body: JSON.stringify(updateDoorForm)
+    })
+
+    const fulfilledPromise = await promise.json()
+
+    return fulfilledPromise
+}
