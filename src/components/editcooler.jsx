@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getDoorsByCoolerId, updateDoor } from "../services/DoorServices/doors";
 import { DoorForm } from "./doorform";
 import { DeleteModal } from "./deletemodal";
+import { Types } from "./types";
 
 export const EditCooler = ({ token, types }) => {
   const [doors, setDoors] = useState([]);
@@ -90,16 +91,7 @@ export const EditCooler = ({ token, types }) => {
                       <input type="number" min="1" ref={shelves} /> <br />
                       <label>Slots</label>{" "}
                       <input type="number" min="1" ref={slots} /> <br />
-                      <select ref={productChoice}>
-                        <option>Select Product</option>
-                        {types.map((type) => {
-                          return (
-                            <option key={type.id} value={type.id}>
-                              {type.name}
-                            </option>
-                          );
-                        })}
-                      </select>
+                      <Types choice={productChoice} token={token}/>
                       <br />
                       <button className="door" id="door-create">
                         Update Cooler Door

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Login = ({ setter }) => {
   const email = useRef();
   const password = useRef();
   const navigate = useNavigate();
@@ -32,6 +32,7 @@ export const Login = () => {
         throw new Error("There was an issue registering your account")
     }
     localStorage.setItem("store_token", storeAsUser.token)
+    setter(storeAsUser)
     navigate("/")
 }
 
