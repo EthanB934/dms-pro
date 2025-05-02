@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { createDoor } from "../services/DoorServices/doors";
 
 export const DoorForm = ({ types, token }) => {
@@ -18,7 +18,7 @@ export const DoorForm = ({ types, token }) => {
             typeId: productChoice.current.value,
             coolerId: coolerId
         }
-        createDoor(door, token).then(() => navigate(`/${coolerId}`))
+        createDoor(door, token).then(() => navigate(`/cooler/${coolerId}`))
     }
 
     return (

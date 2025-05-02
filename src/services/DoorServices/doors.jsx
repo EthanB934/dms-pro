@@ -44,3 +44,12 @@ export const updateDoor = async (updateDoorForm, token) => {
 
     return fulfilledPromise
 }
+
+export const deleteDoor = async (doorId, token) => {
+    await fetch(`http://localhost:8000/doors/${doorId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Token ${token.token}`
+        }
+    })
+}
