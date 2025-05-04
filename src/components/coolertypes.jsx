@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllTypes } from "../services/TypeServices/types";
 
-export const CoolerTypes = ({ selectedTypes, token }) => {
+export const CoolerTypes = ({selectedTypes, token }) => {
   const [allTypes, setAllTypes] = useState();
 
   useEffect(() => {

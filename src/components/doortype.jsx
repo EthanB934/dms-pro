@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllTypes } from "../services/TypeServices/types";
-import { Links } from "react-router-dom";
+
 
 export const DoorType = ({ coolerTypes, setChoice, token }) => {
   const [types, setTypes] = useState([]);
@@ -20,7 +20,7 @@ export const DoorType = ({ coolerTypes, setChoice, token }) => {
           if (coolerTypes?.includes(type.id)) {
             return (
               <li className="door-type-choice" key={type.id}>
-                <input type="checkbox" value={type.id} ref={setChoice} />
+                <input type="checkbox" value={type.id} onChange={() => setChoice(type.id)} />
                 {type.name} <br />
               </li>
             );

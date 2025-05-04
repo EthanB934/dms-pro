@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getDoorsByCoolerId } from "../services/DoorServices/doors";
 
 export const CoolerDoorList = ({ token }) => {
   const [doors, setDoors] = useState([]);
   const { coolerId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if ("token" in token) {
@@ -36,6 +37,7 @@ export const CoolerDoorList = ({ token }) => {
       ) : (
         " "
       )}
+      <button className="door-create" id="door-create" onClick={() => navigate("door")}>Add Door to Cooler</button>
     </article>
   );
 };
