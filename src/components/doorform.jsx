@@ -1,12 +1,16 @@
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { createDoor } from "../services/DoorServices/doors";
 import { Types } from "./types";
+import { getCoolerById } from "../services/CoolerServices/coolers";
+import { CoolerTypes } from "./coolertypes";
+import { DoorType } from "./doortype";
 
 export const DoorForm = ({ token }) => {
     const shelves = useRef();
     const slots = useRef();
     const productChoice = useRef();
+    const [cooler, setCooler] = useState({})
     const { coolerId } = useParams();
     const navigate = useNavigate();
 
@@ -14,14 +18,19 @@ export const DoorForm = ({ token }) => {
         event.preventDefault()
         // Builds a door object to add to a cooler
         const door = {
-            shelves: shelves.current.value,
-            slots: slots.current.value,
-            typeId: productChoice.current.value,
-            coolerId: coolerId
+            shelves: parseInt(shelves.current.value), 
+            slots: parseInt(slots.current.value),
+            typeId: parseInt(productChoice.current.value),
+            coolerId: parseInt(coolerId)
         }
         createDoor(door, token).then(() => navigate(`/cooler/${coolerId}`))
     }
 
+    useEffect(() => {
+        if("token" in token) {
+            getCoolerById(coolerId, token).then((coolerObject) => setCooler(coolerObject))
+        }
+    }, [token])     
     return (
         <form className="door-form" type="submit" onSubmit={handleCreateDoor}>
             <h1>Door Creation</h1>
@@ -32,7 +41,7 @@ export const DoorForm = ({ token }) => {
                 <label>Slots</label>
                 {" "}<input type="number" min="1" ref={slots}/>{" "}
                 <br />
-                <Types  choice={productChoice} token={token}/>
+                <DoorType setChoice={productChoice} coolerTypes={cooler.types} token={token}/>
                 <br />
                 <button className="door" id="door-create">Add Door to Cooler</button>
             </fieldset>

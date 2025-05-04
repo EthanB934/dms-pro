@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {createCooler,getStoreCoolers} from "../services/CoolerServices/coolers";
-import { getAllTypes } from "../services/TypeServices/types"
+import { getStoreCoolers } from "../services/CoolerServices/coolers";
 import "./Home.css";
+import { CoolerTypes } from "../components/coolertypes";
 export const Home = ({ token }) => {
   const [coolers, setCoolers] = useState([]);
   const [cooler, setCooler] = useState({});
@@ -15,11 +15,7 @@ export const Home = ({ token }) => {
     }
   }, [token]);
 
-  const handleCoolerCreation = () => {
-    // I will create a new cooler in the API before the user navigates
-    // And store it in state in this module
-    createCooler(token).then((coolerObject) => setCooler(coolerObject));
-  };
+
 
   const handleCoolerEdit = (event) => {
     // Handles navigating the user to the cooler's door list.
@@ -56,16 +52,7 @@ export const Home = ({ token }) => {
                   Edit Cooler
                 </button>
                 <br />
-                <ul className="types-list">
-                  {cooler.cooler_types.map((type) => {
-                      return (
-                        <li className="type" key={type.id}>
-                        {" "}
-                        {type.name}{" "}
-                      </li>
-                    );
-                  })}
-                  </ul>
+                <CoolerTypes selectedTypes={cooler.types} token={token}/>
               </li>
             );
           })}
@@ -74,7 +61,7 @@ export const Home = ({ token }) => {
         <button
           className="new-cooler"
           id="cooler"
-          onClick={handleCoolerCreation}
+          onClick={() => navigate("cooler")}
         >
           New Cooler
         </button>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllTypes } from "../services/TypeServices/types";
 
-export const Types = ({ token, choice }) => {
+export const Types = ({ token, choice, setChoices, choices }) => {
   const [types, setTypes] = useState([]);
 
   useEffect(() => {
@@ -12,9 +12,12 @@ export const Types = ({ token, choice }) => {
   }, [token]);
 
   return (
-    <select ref={choice}>
+    <select ref={choice} onChange={setChoices}>
       <option>Select Product</option>
       {types.map((type) => {
+        if(choices?.includes(type.id)) {
+          return;
+        }
         return (
           <option key={type.id} value={type.id}>
             {type.name}
