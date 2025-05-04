@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { EditCooler } from "../components/editcooler";
 import { LogOut } from "../authentication/logout";
 import { BackToHome } from "../components/backtohome";
+import { CoolerDoorList } from "../components/coolerdoorlist";
 
 export const ApplicationViews = () => {
   const location = useLocation();
@@ -19,7 +20,6 @@ export const ApplicationViews = () => {
   }, []);
 
   return (
-
     <Routes>
       {/* The authentication routes are available to not authenticated users */}
       <Route path="/register" element={<Register setter={setToken} />} />
@@ -35,10 +35,11 @@ export const ApplicationViews = () => {
       >
         {/* If users authenticate, then they may view other site components */}
         <Route path="/" element={<Home token={token} />} />
-        <Route path="cooler/:coolerId">
+        <Route path="cooler">
           <Route index element={<CoolerForm token={token} />} />
-          <Route path="door" element={<DoorForm token={token} />} />
-          <Route path="edit" element={<EditCooler token={token} />} />
+          <Route path=":coolerId" element={<CoolerDoorList token={token} />} />
+          <Route path=":coolerId/door" element={<DoorForm token={token} />} />
+          <Route path=":coolerId/edit" element={<EditCooler token={token} />} />
         </Route>
       </Route>
     </Routes>

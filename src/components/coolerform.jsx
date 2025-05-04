@@ -1,46 +1,38 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getDoorsByCoolerId } from "../services/DoorServices/doors";
+import { Types } from "./types";
+import { createCooler } from "../services/CoolerServices/coolers";
+import { CoolerTypes } from "./coolertypes";
 
 export const CoolerForm = ({ token }) => {
-  const [doors, setDoors] = useState([]);
+  const [selectedTypes, setSelectedTypes] = useState([]);
   const navigate = useNavigate();
-  const { coolerId } = useParams();
 
-  useEffect(() => {
-    if("token" in token) {
-      // Gets all doors associated with the user selected cooler, or new cooler
-      getDoorsByCoolerId(coolerId, token).then((doorsArray) =>
-        setDoors(doorsArray)
-    );
+  const handleCoolerType = (event) => {
+    const typeId = parseInt(event.target.value)
+    setSelectedTypes([...selectedTypes, typeId]);
   }
-  }, [token]);
 
+  const handleCoolerCreation = () => {
+    // I will create a new cooler in the API before the user navigates
+    // And store it in state in this module
+    const cooler = {
+      types: selectedTypes
+    }
+    createCooler(cooler, token).then((coolerObj) => navigate(`${coolerObj.id}/door`));
+  };
+          
   return (
     <article className="cooler-page">
       <section className="doors">
-        {/* I will map my cooler arrays here */}
-        {doors.length !== 0 ? (
-          <ul className="doors-list">
-            {doors.map((door, index) => {
-              return (
-                <div className="door" key={door.id}>
-                  <li key={door.id}>
-                    Door {index + 1} <br />
-                    Total Shelves {door.shelves} <br />
-                    Total Slots {door.slots} <br />
-                    Door Type {door.type.name}
-                  </li>
-                </div>
-              );
-            })}
-          </ul>
-        ) : (
-          " "
-        )}
+      <Types choices={selectedTypes} setChoices={handleCoolerType} token={token}/>
+        <br />
+        <h2>Selected Types</h2>
+        <CoolerTypes selectedTypes={selectedTypes} token={token}/>
+        <br /> 
         {/* Cooler button will navigate user to the cooler creation form */}
-        <button className="new-door" id="door" onClick={() => navigate("door")}>
-        New Door
+        <button className="new-door" id="door" onClick={handleCoolerCreation}>
+        Create Cooler
         </button>
       </section>
     </article>
