@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Types } from "./types";
-import { createCooler } from "../services/CoolerServices/coolers";
-import { CoolerTypes } from "./coolertypes";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Types } from "../type/types";
+import { createCooler } from "../../services/CoolerServices/coolers";
+import { CoolerTypes } from "../type/coolertypes";
+import "./cooler.css"
 
 export const CoolerForm = ({ token }) => {
   const [selectedTypes, setSelectedTypes] = useState([]);
@@ -23,8 +24,8 @@ export const CoolerForm = ({ token }) => {
   };
           
   return (
-    <article className="cooler-page">
-      <section className="doors">
+    <article className="cooler-page-create">
+      <section className="cooler-create">
       <Types choices={selectedTypes} setChoices={handleCoolerType} token={token}/>
         <br />
         <h2>Selected Types</h2>

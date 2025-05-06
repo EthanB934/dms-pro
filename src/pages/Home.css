@@ -1,0 +1,35 @@
+.home-page {
+    min-width: 95vw;
+    min-height: 85vh;
+}
+
+.coolers-list {
+    display: flex;
+    padding: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    gap: 20px;
+    align-items: stretch; /* Ensures all items stretch to the same height */
+}
+
+.cooler-list-item {
+    width: 275px;
+    min-height: 350px; /* Set the height to match the tallest card */
+    background: rgba(255, 255, 255, 0.25    );
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column; /* Ensures content stacks vertically */
+    justify-content: space-between; /* Distributes content evenly */
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cooler-type {
+    font-size: large;
+    letter-spacing: 0.1rem;
+}
+
+#new-cooler {
+    margin: 1rem;
+}

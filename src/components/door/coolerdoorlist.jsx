@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { getDoorsByCoolerId } from "../services/DoorServices/doors";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { getDoorsByCoolerId } from "../../services/DoorServices/doors";
 export const CoolerDoorList = ({ token }) => {
   const [doors, setDoors] = useState([]);
   const { coolerId } = useParams();
@@ -17,7 +16,7 @@ export const CoolerDoorList = ({ token }) => {
   }, [token]);
 
   return (
-    <article>
+    <article className="door-page">
       {/* I will map my cooler arrays here */}
       {doors.length !== 0 ? (
         <ul className="doors-list">
@@ -37,7 +36,7 @@ export const CoolerDoorList = ({ token }) => {
       ) : (
         " "
       )}
-      <button className="door-create" id="door-create" onClick={() => navigate("door")}>Add Door to Cooler</button>
+      <button id="door-create" onClick={() => navigate("door")}>Add Door to Cooler</button>
     </article>
   );
 };

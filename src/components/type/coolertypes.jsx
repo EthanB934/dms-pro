@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllTypes } from "../services/TypeServices/types";
+import { getAllTypes } from "../../services/TypeServices/types";
 
 export const CoolerTypes = ({selectedTypes, token }) => {
   const [allTypes, setAllTypes] = useState();
@@ -15,7 +15,7 @@ export const CoolerTypes = ({selectedTypes, token }) => {
       {allTypes
         ? allTypes.map((type) => {
             if (selectedTypes.includes(type.id)) {
-              return <li key={type.id}>{type.name}</li>;
+              return <p className="cooler-type" key={type.id}>{type.name}</p>;
             }
           })
         : " "}

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import "./auth.css"
 
 export const LogOut = ({ setter }) => {
     const navigate = useNavigate();
@@ -10,6 +11,6 @@ export const LogOut = ({ setter }) => {
     }
 
     return (
-        <button className="log-out" id="log-out" onClick={handleLogOut}>Log Out</button>
+        <button id="log-out" onClick={handleLogOut}>Log Out</button>
     )
 }
