@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
-
+import "./auth.css"
 export const Register = ({ setter }) => {
     const address = useRef()
     const email = useRef()
@@ -57,7 +57,7 @@ export const Register = ({ setter }) => {
             <br/>
             <button className="registration-button" id="register" >Register</button>
             <br />
-            <Link to="/login">Return to Login</Link>
+            <Link className="link" to="/login">Return to Login</Link>
         </fieldset>
     </form>
 }

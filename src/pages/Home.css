@@ -1,6 +1,6 @@
 .home-page {
-    min-width: 95vw;
-    min-height: 85vh;
+    min-width: fit-content;
+    min-height: 100vh;
 }
 
 .coolers-list {
