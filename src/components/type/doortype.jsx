@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllTypes } from "../services/TypeServices/types";
+import { getAllTypes } from "../../services/TypeServices/types";
 
 
 export const DoorType = ({ coolerTypes, setChoice, token }) => {
@@ -13,8 +13,7 @@ export const DoorType = ({ coolerTypes, setChoice, token }) => {
   }, [token]);
 
   return (
-    <>
-      <h3>Choose this door's type</h3>
+    <>  
       <ul>
         {types.map((type) => {
           if (coolerTypes?.includes(type.id)) {

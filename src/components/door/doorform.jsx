@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
-import { createDoor } from "../services/DoorServices/doors";
-import { getCoolerById } from "../services/CoolerServices/coolers";
-import { DoorType } from "./doortype";
-
+import { createDoor } from "../../services/DoorServices/doors";
+import { getCoolerById } from "../../services/CoolerServices/coolers";
+import { DoorType } from "../type/doortype";
+import "./door.css"
 export const DoorForm = ({ token }) => {
     const shelves = useRef();
     const slots = useRef();
@@ -30,6 +30,7 @@ export const DoorForm = ({ token }) => {
         }
     }, [token])     
     return (
+        <article className="door-article">
         <form className="door-form" type="submit" onSubmit={handleCreateDoor}>
             <h1>Door Creation</h1>
             <fieldset className="door-fields">
@@ -41,8 +42,9 @@ export const DoorForm = ({ token }) => {
                 <br />
                 <DoorType setChoice={setTypeId} coolerTypes={cooler.types} token={token}/>
                 <br />
-                <button className="door" id="door-create">Add Door to Cooler</button>
+                <button className="door-create">Add Door to Cooler</button>
             </fieldset>
         </form>
+        </article>
     )
 }
