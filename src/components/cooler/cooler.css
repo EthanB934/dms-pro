@@ -1,0 +1,112 @@
+.cooler-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+.cooler-page-create {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.cooler-create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 auto;
+  width: 75%;
+  height: 75vh;
+}
+
+.doors {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+}
+
+.doors-list {
+  display: flex;
+  padding: 2rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  gap: 20px;
+  align-items: stretch; /* Ensures all items stretch to the same height */
+}
+
+.door {
+  width: 275px;
+  min-height: 350px; /* Set the height to match the tallest card */
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column; /* Ensures content stacks vertically */
+  justify-content: space-between; /* Distributes content evenly */
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: large;
+  letter-spacing: 0.1rem;
+}
+
+#door-delete {
+  margin: 1rem;
+}
+
+.delete-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: 2px solid black;
+  box-shadow: 0.5px, 1px, black;
+  height: fit-content;
+  width: fit-content;
+  padding: 2rem 1rem 2rem 1rem;
+  float: right;
+}
+
+.delete-modal h2 {
+  background-color: black;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  margin: 2rem;
+  gap: 2rem;
+}
+
+.door-fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.25);
+
+  label {
+    text-align: left;
+  }
+
+  ul {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+
+    .door-type-choice {
+        display: flex;
+        justify-content: left;
+    }
+  }
+}
+
+.pop-ups {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+}
