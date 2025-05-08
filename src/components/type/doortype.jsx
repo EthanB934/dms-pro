@@ -19,7 +19,7 @@ export const DoorType = ({ coolerTypes, setChoice, token }) => {
           if (coolerTypes?.includes(type.id)) {
             return (
               <li className="door-type-choice" key={type.id}>
-                <input type="checkbox" value={type.id} onChange={() => setChoice(type.id)} />
+                <input type="checkbox" id={type.id} onChange={setChoice} />
                 {type.name} <br />
               </li>
             );
